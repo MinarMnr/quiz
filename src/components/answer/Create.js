@@ -74,7 +74,7 @@ const Update = (props) => {
               <h3>
                 Answer
                 <Button floated="right">
-                  <Link to="/">Question List</Link>
+                  <Link to="/list">Question List</Link>
                 </Button>
               </h3>
             </Grid.Column>
