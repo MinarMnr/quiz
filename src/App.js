@@ -5,7 +5,6 @@ import questionCreate from "./components/question/Create";
 import questionUpdate from "./components/question/Update";
 import questionList from "./components/question/List";
 import answerCreate from "./components/answer/Create";
-// import login from "./components/auth/Login";
 import Login from "./components/auth/Login";
 
 function App() {

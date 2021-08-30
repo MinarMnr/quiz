@@ -28,8 +28,6 @@ const Update = (props) => {
     } else {
       setNotFound(true);
     }
-    console.log(data);
-    console.log(notFound);
   }, [notFound]);
 
   const handleFormSubmit = async (event) => {

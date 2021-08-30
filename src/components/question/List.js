@@ -17,7 +17,6 @@ const List = () => {
       const qList = JSON.parse(localStorage.getItem("qList")) || [];
       const type = JSON.parse(localStorage.getItem("auth")) || [];
       setAuthType(type[0].type);
-      console.log(authType);
       setDatas(qList);
       setLoading(false);
     };
@@ -56,9 +55,11 @@ const List = () => {
         >
           <Link to="/">LOGOUT</Link>
         </Button>
-        <Button floated="right">
-          <Link to="/question/create">Question Create</Link>
-        </Button>
+        {authType === "admin" && (
+          <Button floated="right">
+            <Link to="/question/create">Question Create</Link>
+          </Button>
+        )}
       </Container>
       <Show
         datas={currentDatas}

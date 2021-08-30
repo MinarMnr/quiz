@@ -57,7 +57,7 @@ const Create = () => {
               <h1>
                 Question Create
                 <Button floated="right">
-                  <Link to="/">Question List</Link>
+                  <Link to="/list">Question List</Link>
                 </Button>
               </h1>
             </Grid.Column>
