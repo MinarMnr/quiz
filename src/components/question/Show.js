@@ -49,6 +49,9 @@ const Show = ({
                   <Button>
                     <Link to={`/question/update/${data.id}`}>Update</Link>
                   </Button>
+                  <Button>
+                    <Link to={`/answer/create/${data.id}`}>Answer</Link>
+                  </Button>
                 </Table.Cell>
               </Table.Row>
             ))}

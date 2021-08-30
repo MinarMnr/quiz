@@ -88,7 +88,7 @@ const Create = () => {
                     type="text"
                     theme="snow"
                     required
-                    placeholder="Write down you question...."
+                    placeholder="Write down your question...."
                     value={question}
                     onChange={handleQuestionChange}
                   />

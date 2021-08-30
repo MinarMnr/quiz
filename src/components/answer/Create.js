@@ -1,22 +1,15 @@
 import React, { useState, useEffect } from "react";
-import {
-  Container,
-  Grid,
-  Form,
-  Button,
-  Message,
-  Dropdown,
-} from "semantic-ui-react";
+import { Container, Grid, Form, Button, Message } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import ReactQuill from "react-quill";
 
 const Update = (props) => {
   const [question, setQuestion] = useState(undefined);
-  const [status, setStatus] = useState(undefined);
+  const [answer, setAnswer] = useState("");
   const [message, setMessage] = useState(null);
   const [visible, setVisible] = useState(false);
   const [formSubmit, setFormSubmit] = useState(false);
-  const [qId] = useState(Number(props.match.params.id));
+  const [qId] = useState(Number(props.match.params.qid));
   const [data, setData] = useState(null);
   const [notFound, setNotFound] = useState(true);
 
@@ -29,7 +22,8 @@ const Update = (props) => {
       });
       setData(questionDetails[0]);
       setQuestion(questionDetails[0].question);
-      setStatus(questionDetails[0].status);
+      questionDetails[0].answer !== undefined &&
+        setAnswer(questionDetails[0].answer);
       setNotFound(false);
     } else {
       setNotFound(true);
@@ -41,54 +35,37 @@ const Update = (props) => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
-    if (question === undefined || question === "") {
+    if (answer === undefined || answer === "") {
       setFormSubmit(false);
       setVisible(true);
-      setMessage("Question is required!");
+      setMessage("Answer is required!");
     } else {
-      let questionData = {
+      let answerData = {
         id: qId,
         question,
-        status,
+        answer,
+        status: true,
       };
-      let qList = [];
-      qList = JSON.parse(localStorage.getItem("qList"));
-      let newQlist = qList.filter((ele) => {
+      let aList = [];
+      aList = JSON.parse(localStorage.getItem("qList"));
+      let newQlist = aList.filter((ele) => {
         return ele.id !== qId;
       });
-      newQlist.push(questionData);
+      newQlist.push(answerData);
       localStorage.setItem("qList", JSON.stringify(newQlist));
 
       setFormSubmit(true);
       setVisible(true);
-      setMessage("Question updated in localstorage successfully!");
-      setQuestion("");
+      setMessage("Answer added in localstorage successfully!");
     }
   };
 
-  const handleQuestionChange = (value) => {
-    setQuestion(value);
+  const handleAnswerChange = (value) => {
+    setAnswer(value);
   };
   const handleDismiss = () => {
     setVisible(false);
   };
-
-  const handleStatusChange = (event, { value }) => {
-    setStatus(value);
-  };
-
-  const statusOptions = [
-    {
-      key: "1",
-      text: "Active",
-      value: true,
-    },
-    {
-      key: "2",
-      text: "Inactive",
-      value: false,
-    },
-  ];
 
   return (
     <React.Fragment>
@@ -97,14 +74,14 @@ const Update = (props) => {
           <Grid.Row centered>
             <Grid.Column width={8}>
               <h3>
-                Question Update
+                Answer
                 <Button floated="right">
                   <Link to="/">Question List</Link>
                 </Button>
               </h3>
             </Grid.Column>
           </Grid.Row>
-          {!notFound && data !== undefined && status !== undefined ? (
+          {!notFound && data !== undefined && question !== undefined ? (
             <Grid.Row centered>
               <Grid.Column width={8}>
                 {visible && formSubmit && message != null && (
@@ -125,41 +102,28 @@ const Update = (props) => {
                 <Form onSubmit={handleFormSubmit}>
                   <Form.Field>
                     <p>Question </p>
-                    {/* <input
-                      id="question"
-                      type="text"
-                      value={question}
-                      required
-                      placeholder="Write down you question...."
-                      onChange={handleQuestionChange}
-                    /> */}
                     <ReactQuill
                       id="question"
                       type="text"
-                      theme="snow"
-                      required
-                      placeholder="Write down your question...."
+                      readOnly
                       value={question}
-                      onChange={handleQuestionChange}
                     />
                   </Form.Field>
-
                   <Form.Field>
-                    <p>Status: </p>
-                    <Dropdown
-                      placeholder="Select Status"
-                      id="status"
-                      fluid
-                      selection
-                      onChange={handleStatusChange}
-                      defaultValue={status}
-                      options={statusOptions}
-                      value={statusOptions.value}
+                    <p>Answer </p>
+                    <ReactQuill
+                      id="answer"
+                      type="text"
+                      theme="snow"
+                      required
+                      placeholder="Write down your answer...."
+                      value={answer}
+                      onChange={handleAnswerChange}
                     />
                   </Form.Field>
 
                   <Button type="submit" value="submit">
-                    Update
+                    Answer
                   </Button>
                 </Form>
               </Grid.Column>
@@ -167,7 +131,7 @@ const Update = (props) => {
           ) : (
             <Grid.Row centered>
               <Grid.Column width={8}>
-                <p>No Data Found</p>
+                <p>No Question Found</p>
               </Grid.Column>
             </Grid.Row>
           )}
