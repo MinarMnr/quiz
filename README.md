@@ -27,14 +27,19 @@ Password could be anything.
 ## After admin login ...
 
 ->a Quetion list page will appear
+
 ->question create button will appear
+
 ->after successfull creation, you can also view that question in the list and also edit it .
 
 ## After user login ...
 
 ->a Quetion list page will appear
+
 ->answer field will appear if question is active
+
 ->user can also update his answer
+
 
 For persistant data, localstorage is used across this app.
 
