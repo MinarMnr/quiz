@@ -9,6 +9,7 @@ const Show = ({
   totalDatas,
   paginate,
   serial,
+  type,
 }) => {
   const pageNumbers = [];
 
@@ -46,12 +47,16 @@ const Show = ({
                 </Table.Cell>
                 <Table.Cell>{data.status ? "Active" : "Inactive"}</Table.Cell>
                 <Table.Cell>
-                  <Button>
-                    <Link to={`/question/update/${data.id}`}>Update</Link>
-                  </Button>
-                  <Button>
-                    <Link to={`/answer/create/${data.id}`}>Answer</Link>
-                  </Button>
+                  {type === "admin" && (
+                    <Button>
+                      <Link to={`/question/update/${data.id}`}>Update</Link>
+                    </Button>
+                  )}
+                  {type === "user" && data.status && (
+                    <Button>
+                      <Link to={`/answer/create/${data.id}`}>Answer</Link>
+                    </Button>
+                  )}
                 </Table.Cell>
               </Table.Row>
             ))}

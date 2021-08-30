@@ -75,14 +75,6 @@ const Create = () => {
               <Form onSubmit={handleFormSubmit}>
                 <Form.Field>
                   <p>Question </p>
-                  {/* <input
-                    id="question"
-                    type="text"
-                    value={question}
-                    required
-                    placeholder="Write down you question...."
-                    onChange={handleQuestionChange}
-                  /> */}
                   <ReactQuill
                     id="question"
                     type="text"
