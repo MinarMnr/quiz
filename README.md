@@ -42,5 +42,3 @@ Password could be anything.
 
 
 For persistant data, localstorage is used across this app.
-
-Feel free contact with me, if you have any query.
